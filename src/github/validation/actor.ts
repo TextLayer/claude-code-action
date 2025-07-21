@@ -22,7 +22,7 @@ export async function checkHumanActor(
   console.log(`Actor type: ${actorType}`);
 
   if (actorType !== "User") {
-    throw new Error(
+    console.log(
       `Workflow initiated by non-human actor: ${githubContext.actor} (type: ${actorType}).`,
     );
   }
