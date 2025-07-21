@@ -8,8 +8,8 @@
 import * as core from "@actions/core";
 import { setupGitHubToken } from "../github/token";
 import { checkTriggerAction } from "../github/validation/trigger";
-import { checkHumanActor } from "../github/validation/actor";
-import { checkWritePermissions } from "../github/validation/permissions";
+// import { checkHumanActor } from "../github/validation/actor";
+// import { checkWritePermissions } from "../github/validation/permissions";
 import { createInitialComment } from "../github/operations/comments/create-initial";
 import { setupBranch } from "../github/operations/branch";
 import { configureGitAuth } from "../github/operations/git-config";
@@ -29,15 +29,15 @@ async function run() {
     const context = parseGitHubContext();
 
     // Step 3: Check write permissions
-    const hasWritePermissions = await checkWritePermissions(
-      octokit.rest,
-      context,
-    );
-    if (!hasWritePermissions) {
-      throw new Error(
-        "Actor does not have write permissions to the repository",
-      );
-    }
+    // const hasWritePermissions = await checkWritePermissions(
+    //   octokit.rest,
+    //   context,
+    // );
+    // if (!hasWritePermissions) {
+    //   throw new Error(
+    //     "Actor does not have write permissions to the repository",
+    //   );
+    // }
 
     // Step 4: Check trigger conditions
     const containsTrigger = await checkTriggerAction(context);
@@ -48,7 +48,7 @@ async function run() {
     }
 
     // Step 5: Check if actor is human
-    await checkHumanActor(octokit.rest, context);
+    // await checkHumanActor(octokit.rest, context);
 
     // Step 6: Create initial tracking comment
     const commentData = await createInitialComment(octokit.rest, context);
